@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="waitstaffCalc">
+<head>
+	<title>Waitstaff Calculator</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script data-require="angular.js@1.3.10" data-semver="1.3.10" src="https://code.angularjs.org/1.3.10/angular.js"></script>
+	<script type="text/javascript" src="js/waitstaffCalc.js"></script>
+</head>
+<body>
+	<div class="container" ng-controller="waitstaffCalcController">
+		<h1>Waitstaff Calculator</h1>
+		<div class="row">
+			<div class="col-md-6 block">
+				<h2>Enter the Meal Details</h2>
+				<form name="mealDetails" novalidate ng-submit="submit()" class="form-horizontal">
+					<label for="price" class="control-label col-sm-5">Base Meal Price : $</label>
+					<div class="col-sm-7">
+						<input type="text" name="price" ng-model="data.price" ng-pattern="/^[0-9]*$/" class="form-control">
+					</div>
+					<label for="tax" class="control-label col-sm-5">Tax Rate : %</label>
+					<div class="col-sm-7">
+						<input type="text" name="tax" ng-model="data.tax" ng-pattern="/^[0-9]*$/" class="form-control">
+					</div>
+					<label for="tip" class="control-label col-sm-5">Tip Percentage : %</label>
+					<div class="col-sm-7">
+						<input type="text" name="tip" ng-model="data.tip" ng-pattern="/^[0-9]*$/" class="form-control">
+					</div>
+					<button type="submit" class="btn btn-defualt">Submit</button>
+					<a ng-click="cancel()" class="btn btn-default">Cancel</a>
+				</form>
+				<span ng-if="mealDetails.$submitted && mealDetails.price.$error.pattern" class="error">Please enter a numeric value</span>
+				<span ng-if="mealDetails.$submitted && mealDetails.tax.$error.pattern" class="error">Please enter a numeric value</span>
+				<span ng-if="mealDetails.$submitted && mealDetails.tip.$error.pattern" class="error">Please enter a numeric value</span>
+			</div>
+			<div class="col-md-6">
+				<div class="customerCharges block">
+					<h2>Customer Charges</h2>
+					<table>
+						<tr>
+							<td>Subtotal:</td>
+							<td>{{subtotal | number:2}}</td>
+						</tr>
+						<tr>
+							<td>Tip:</td>
+							<td>{{chargeTip | number:2}}</td>
+						</tr>
+						<tr>
+							<td>Total:</td>
+							<td>{{subtotal + chargeTip | number:2}}</td>
+						</tr>
+					</table>
+				</div>
+				<div class="earningInfo block">
+					<h2>My Earnings Info</h2>
+					<p>Tip total: {{tipTotal | number: 2}}</p>
+					<p>Meal Count: {{mealCount | number}}</p>
+					<p>Average Tip Per Meal: {{avgTip | number: 2}}</p>
+					
+				</div>
+			</div>
+		</div>
+		<a class="btn btn-default reset"  ng-click="reset()">Reset</a>
+	</div>
+</body>
+</html>
