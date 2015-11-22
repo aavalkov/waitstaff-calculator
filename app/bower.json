@@ -1,0 +1,18 @@
+{
+  "name": "waitstaff_calculator",
+  "homepage": "https://github.com/aavalkov/waitstaff-calculator",
+  "authors": [
+    "Anna Valkov <anna.a.valkov@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
