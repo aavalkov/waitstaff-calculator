@@ -4,22 +4,24 @@
 		<form name="mealDetails" novalidate ng-submit="submit()" class="form-horizontal">
 			<label for="price" class="control-label col-sm-5">Base Meal Price : $</label>
 			<div class="col-sm-7">
-				<input type="text" name="price" ng-model="data.price" ng-pattern="/^[0-9]*$/" class="form-control">
+				<input type="number" name="price" ng-model="data.price" class="form-control" required>
+				<span ng-if="mealDetails.$submitted && mealDetails.price.$error.required" class="error">Meal price is required</span>
 			</div>
 			<label for="tax" class="control-label col-sm-5">Tax Rate : %</label>
 			<div class="col-sm-7">
-				<input type="text" name="tax" ng-model="data.tax" ng-pattern="/^[0-9]*$/" class="form-control">
+				<input type="number" name="tax" ng-model="data.tax" class="form-control" required>
+				<span ng-if="mealDetails.$submitted && mealDetails.tax.$error.required" class="error">Tax Rate is required</span>
 			</div>
 			<label for="tip" class="control-label col-sm-5">Tip Percentage : %</label>
 			<div class="col-sm-7">
-				<input type="text" name="tip" ng-model="data.tip" ng-pattern="/^[0-9]*$/" class="form-control">
+				<input type="number" name="tip" ng-model="data.tip" class="form-control" required>
+				<span ng-if="mealDetails.$submitted && mealDetails.tip.$error.required" class="error">Tip Value is required</span>
 			</div>
 			<button type="submit" class="btn btn-defualt">Submit</button>
 			<a ng-click="cancel()" class="btn btn-default">Cancel</a>
 		</form>
-		<span ng-if="mealDetails.$submitted && mealDetails.price.$error.pattern" class="error">Please enter a numeric value</span>
-		<span ng-if="mealDetails.$submitted && mealDetails.tax.$error.pattern" class="error">Please enter a numeric value</span>
-		<span ng-if="mealDetails.$submitted && mealDetails.tip.$error.pattern" class="error">Please enter a numeric value</span>
+		
+		
 	</div>
 	<div class="col-md-6">
 		<div class="customerCharges block">
