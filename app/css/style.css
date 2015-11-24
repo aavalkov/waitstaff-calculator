@@ -23,10 +23,39 @@ table tr:last-child{
 }
 
 .earningInfo {
-	margin-top: 30px;
+	width: 50%;
+    margin: 30px auto 0;
+    text-align: center;
+    padding-bottom: 60px;
 }
 
 .reset {
 	float: right;
 	margin-top: 10px;
 }
+
+#main-menu {
+	text-align: center;
+}
+
+#main-menu li{
+	display:inline;
+}
+
+#main-menu li:not(:last-child):after{
+	content: '|';
+	margin-left: 5px;
+}
+.new-meal {
+	margin: 0 auto 20px;
+	width: 50%;
+}
+
+.new-meal h2, .new-meal form {
+	text-align: center
+}
+
+.meal-details-btn {
+	margin-top: 20px;
+}
+
