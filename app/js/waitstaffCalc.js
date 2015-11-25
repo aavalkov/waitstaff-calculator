@@ -22,7 +22,10 @@ angular.module('waitstaffCalc', ['ngRoute'])
 		}).when('/my-earnings',{
 			templateUrl:'myEarnings.html',
 			controller: 'EarningsCtrl'
+		}).when('/error', {
+		    template : '<p>Error - Page Not Found</p>'
 		})
+		.otherwise('/error');
 	}).controller('HomeCtrl', function($scope){
 		//empty
 	})
