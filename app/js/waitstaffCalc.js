@@ -1,17 +1,4 @@
-angular.module('waitstaffCalc', ['ngRoute'])
-	.run(function($rootScope){
-		$rootScope.tipTotal = 0;
-		$rootScope.mealCount = 0;
-		$rootScope.subtotal = 0;
-		$rootScope.chargeTip = 0;
-		$rootScope.avgTip = 0;
-
-		$rootScope.earningsInfo = function(tipAmount){
-			$rootScope.tipTotal += parseInt(tipAmount);
-			$rootScope.mealCount += 1;
-			$rootScope.avgTip = $rootScope.tipTotal/$rootScope.mealCount;
-		};
-	})
+angular.module('waitstaffCalc', ['ngRoute','ngAnimate'])
 	.config(function($routeProvider){
 		$routeProvider.when('/',{
 			templateUrl:'home.html',
@@ -26,7 +13,33 @@ angular.module('waitstaffCalc', ['ngRoute'])
 		    template : '<p>Error - Page Not Found</p>'
 		})
 		.otherwise('/error');
-	}).controller('HomeCtrl', function($scope){
+	})
+	.run(function($rootScope, $location, $timeout){
+		$rootScope.tipTotal = 0;
+		$rootScope.mealCount = 0;
+		$rootScope.subtotal = 0;
+		$rootScope.chargeTip = 0;
+		$rootScope.avgTip = 0;
+
+		$rootScope.earningsInfo = function(tipAmount){
+			$rootScope.tipTotal += parseInt(tipAmount);
+			$rootScope.mealCount += 1;
+			$rootScope.avgTip = $rootScope.tipTotal/$rootScope.mealCount;
+		};
+
+		$rootScope.$on('$routeChangeError', function() {
+        	$location.path("/error");
+	    });
+	    $rootScope.$on('$routeChangeStart', function() {
+	        $rootScope.isLoading = true;
+	    });
+	    $rootScope.$on('$routeChangeSuccess', function() {
+	      $timeout(function() {
+	        $rootScope.isLoading = false;
+	      }, 1000);
+	    });
+	})
+	.controller('HomeCtrl', function($scope){
 		//empty
 	})
 	.controller('NewMealCtrl', function($scope, $rootScope){
