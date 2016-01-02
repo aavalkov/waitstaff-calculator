@@ -1,16 +1,53 @@
 describe('customerCharges', function(){
-	beforeEach(module('waitstaffCalc'));
+  beforeEach(module('waitstaffCalc'));
 
-	var scope;
-	beforeEach(inject(function($rootScope, $scope) {
-	    scope = $rootScope.$new();
-	    $scope.data.price = 100;
-		$scope.data.tax = 9;
-		$scope.data.tip = 20
+  var $scope,ctrl;
+  beforeEach(inject(function($rootScope, $controller) {
+      $scope = $rootScope.$new();
+      $scope.data = {
+        price: 100,
+        tax: 9,
+        tip: 20
+      };
+
+      $scope.mealDetails = {
+      	$valid: true 
+      };
+
+	  ctrl = $controller('NewMealCtrl',{
+	  	$scope: $scope
+	  });
+  }));
+
+  it ('should set the subtotal', inject(function($rootScope) {
+    $scope.submit()
+    expect($rootScope.subtotal).toBe(109);
+  }));
+});
+
+
+describe('cancel', function(){
+	beforeEach(module('waitstaffCalc'));
+	var $scope,ctrl;
+	beforeEach(inject(function($rootScope, $controller) {
+	  $scope = $rootScope.$new();
+	  $scope.data = {
+	    price: 100,
+	    tax: 9,
+	    tip: 20
+	  };
+
+	  $scope.mealDetails = {
+		$setPristine: function() {}
+	  };
+
+	  ctrl = $controller('NewMealCtrl',{
+	  	$scope: $scope
+	  });
 	}));
 
-	it ('should set the subtotal', inject(function($rootScope, $scope) {
-		customerCharges()
-		expect($rootScope.subtotal).toBe(109);
+	it ('clear the values in the new meals calculator', inject(function($rootScope) {
+	$scope.cancel()
+	expect($scope.data).toEqual([]);
 	}));
 });

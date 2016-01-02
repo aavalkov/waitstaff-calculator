@@ -3,17 +3,13 @@
 
 		$scope.submit = function(){
 			if ($scope.mealDetails.$valid){
-				console.log('The form is valid');
 				customerCharges();
-			} else {
-				console.log('The form is invalid');
 			}
 		};
 
 		$scope.cancel = function(){
 			$scope.data = [];
 			$scope.mealDetails.$setPristine();
-
 		};
 		
 		customerCharges = function(){

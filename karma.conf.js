@@ -12,10 +12,12 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
-
     // list of files / patterns to load in the browser
     files: [
       './app/bower_components/angular/angular.js',
+      './app/bower_components/angular-animate/angular-animate.js',
+      './app/bower_components/angular-route/angular-route.js',
+      './app/bower_components/angular-mocks/angular-mocks.js',
       './app/**/*Spec.js',
       './app/**/**.js'
     ],
@@ -23,10 +25,8 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-        './app/bower_components/**/!(angular|angular-route).js',
+        './app/bower_components/**/!(angular|angular-animate|angular-route|angular-mocks).js',
     ],
-
-
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
